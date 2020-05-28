@@ -1,12 +1,12 @@
-# fun-tools fun-tools
+# sso-util
 
 ## install
 ``` 
-npm install sso-util-client
+npm install sso-util
 ```
 ## usage
 ```
-import ssoutil from 'sso-util-client'
+import ssoutil from 'sso-util'
 ```
 ## function list
 ** 前缀 ssoutil. 省略

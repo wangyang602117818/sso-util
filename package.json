@@ -1,5 +1,5 @@
 {
-  "name": "sso-util-client",
+  "name": "sso-util",
   "version": "1.0.0",
   "description": "Frontend tools",
   "main": "index.js",
