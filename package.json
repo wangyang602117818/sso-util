@@ -1,0 +1,17 @@
+{
+  "name": "fun-tools",
+  "version": "1.1.4",
+  "description": "Frontend tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "common",
+    "funs"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "wangyang",
+  "license": "ISC"
+}
