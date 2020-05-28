@@ -2,14 +2,14 @@
 
 ## install
 ``` 
-npm install fun-tools
+npm install sso-util-client
 ```
 ## usage
 ```
-import funtools from 'fun-tools'
+import ssoutil from 'sso-util-client'
 ```
 ## function list
-** 前缀 funtools. 省略
+** 前缀 ssoutil. 省略
 ```
 sso验证方法(window.token_jwt_data)
     authorize(baseUrl, cookieName)

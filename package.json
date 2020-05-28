@@ -1,6 +1,6 @@
 {
-  "name": "fun-tools",
-  "version": "1.1.4",
+  "name": "sso-util-client",
+  "version": "1.0.0",
   "description": "Frontend tools",
   "main": "index.js",
   "scripts": {
