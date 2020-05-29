@@ -20,6 +20,7 @@ cookie相关
     var result = getQueryString(name)  //获取url上面的参数
     var result = parseBase64String(str) //还原从url上面传过来的base64字符串
     var result = parseBsonTime(str) //解析从mongo中传出来的 date.$date
+    var result = parseIsoDateTime(str) //解析Newtonsoft.Json格式化的日期(IsoDateFormat)
     var result = formatMonth(month) //格式化成2位的时间格式
     var result = getReturnUrl(name) //获取url上面name参数之后所有部分,这和getQueryString有所不同,因为returnUrl后面可能还有参数
  随机数相关

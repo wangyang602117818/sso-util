@@ -45,6 +45,9 @@ function parseBsonTime(value) {
     date.setMilliseconds(value);
     return date.getFullYear() + "-" + formatMonth((date.getMonth() + 1)) + "-" + formatMonth(date.getDate()) + " " + formatMonth(date.getHours()) + ":" + formatMonth(date.getMinutes()) + ":" + formatMonth(date.getSeconds());
 }
+function parseIsoDateTime(time) {
+    return time.split('.')[0].replace("T", " ");
+}
 //格式化成2位的时间格式
 function formatMonth(month) {
     return month.toString().length == 1 ? "0" + month : month;
@@ -154,6 +157,7 @@ module.exports = {
     getQueryString: getQueryString,
     parseBase64String: parseBase64String,
     parseBsonTime: parseBsonTime,
+    parseIsoDateTime: parseIsoDateTime,
     formatMonth: formatMonth,
     randomWord: randomWord,
     randomNumber: randomNumber,
