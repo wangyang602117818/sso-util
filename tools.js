@@ -45,7 +45,9 @@ function parseBsonTime(value) {
     date.setMilliseconds(value);
     return date.getFullYear() + "-" + formatMonth((date.getMonth() + 1)) + "-" + formatMonth(date.getDate()) + " " + formatMonth(date.getHours()) + ":" + formatMonth(date.getMinutes()) + ":" + formatMonth(date.getSeconds());
 }
+//解析IsoDateTime(2020-05-24T11:38:02.235519)
 function parseIsoDateTime(time) {
+    if (!time) return time;
     return time.split('.')[0].replace("T", " ");
 }
 //格式化成2位的时间格式
