@@ -40,6 +40,6 @@ html 字符串相关
     var arr = reMapArray(array, len) //将一个一维数组转换成二维数组每一项有len个元素,不足填充null
     removeArrayItem(array, val)  //移除数组[a,b,c,d]中某一项c,不包含数组对象
 时间相关
-    var result = dateAddDays("2019-01-31",-13,"yyyy-MM-dd");  //日期添加或减少几天
+    var result = dateAddDays(date,-13,"yyyy-MM-dd");  //日期添加或减少几天date可以为字符串或者Date对象
 ```
 

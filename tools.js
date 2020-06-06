@@ -153,9 +153,14 @@ function getOuterHtml(html, tag) {
     var regex = new RegExp("<" + tag + "[\\s\\S\\r\\n]*<\\/" + tag + ">", "ig");
     return html.match(regex)[0];
 }
-//"yyyy-MM-dd"类型的时间添加或者减少days天
+//"yyyy-MM-dd"类型或者Date类型的时间添加或者减少days天
 function dateAddDays(date, days, format) {
-    var val = new Date(date);
+    var val = null;
+    if (date instanceof Date) {
+        val = date;
+    } else {
+        var val = new Date(date);
+    }
     val.setDate(date.getDate() + days);
     return getDateFormat(val, format);
 }
