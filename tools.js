@@ -153,6 +153,50 @@ function getOuterHtml(html, tag) {
     var regex = new RegExp("<" + tag + "[\\s\\S\\r\\n]*<\\/" + tag + ">", "ig");
     return html.match(regex)[0];
 }
+//"yyyy-MM-dd"类型的时间添加或者减少days天
+function dateAddDays(date, days, format) {
+    var val = new Date(date);
+    val.setDate(date.getDate() + days);
+    return getDateFormat(val, format);
+}
+//返回格式化后的时间字符串 date:Date对象,format:"yyyy-MM-dd"|"yyyy/MM/dd"
+function getDateFormat(date, format) {
+    var time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+    var realMonth = time_arr[1];
+    format = format.replace(/([\W]|^)([yY]+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + yearFormatInner(time_arr[0], g3.length) + g4;
+    });
+    format = format.replace(/([\W]|^)(M+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + monthFormatInner(realMonth + 1, g3.length) + g4;
+    });
+    format = format.replace(/([\W]|^)([dD]+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + monthFormatInner(time_arr[2], g3.length) + g4;
+    });
+    format = format.replace(/([\W]|^)(h+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + monthFormatInner(time_arr[3], g3.length) + g4;
+    });
+    format = format.replace(/([\W]|^)(m+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + monthFormatInner(time_arr[4], g3.length) + g4;
+    });
+    format = format.replace(/([\W]|^)(s+)(\W|$)/, function (g1, g2, g3, g4) {
+        return g2 + monthFormatInner(time_arr[5], g3.length) + g4;
+    });
+    return format;
+}
+//格式化年，len=位数
+function yearFormatInner(year, len) {
+    if (year.toString().length == len) return year.toString();
+    if (year.toString().length == 4 && len == 2) return year.toString().substr(2, 2);
+    if (year.toString().length == 2 && len == 4) return new Date().getFullYear().toString().substr(0, 2) + year;
+    return year;
+}
+//格式化月，天，小时，
+function monthFormatInner(month, len) {
+    if (len == 1) return month;
+    if (len == 2) return month.toString().length == 1 ? "0" + month : month;
+    if (len == 0) return "";
+    return month;
+}
 module.exports = {
     getCookie: getCookie,
     setCookie: setCookie,
@@ -172,5 +216,6 @@ module.exports = {
     trimStartChar: trimStartChar,
     htmlToDom: htmlToDom,
     reMapArray: reMapArray,
-    getOuterHtml: getOuterHtml
+    getOuterHtml: getOuterHtml,
+    dateAddDays: dateAddDays
 }

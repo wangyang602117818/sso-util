@@ -26,7 +26,6 @@ cookie相关
  随机数相关
     var result = randomWord(min,max)  //min:最小位数,max:最大位数
     var result = randomNumber(min,max) //min:最小值,max:最大值
-
 设备相关
     var device = getDeviceType(userAgent) //根据userAgent获取设备类型 mobile|pc
 字符串相关
@@ -40,6 +39,7 @@ html 字符串相关
 数组相关
     var arr = reMapArray(array, len) //将一个一维数组转换成二维数组每一项有len个元素,不足填充null
     removeArrayItem(array, val)  //移除数组[a,b,c,d]中某一项c,不包含数组对象
-
+时间相关
+    var result = dateAddDays("2019-01-31",-13,"yyyy-MM-dd");  //日期添加或减少几天
 ```
 
