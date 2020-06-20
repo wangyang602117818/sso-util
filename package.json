@@ -1,6 +1,6 @@
 {
   "name": "sso-util",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Frontend tools",
   "main": "index.js",
   "scripts": {
@@ -13,5 +13,13 @@
   "dependencies": {},
   "devDependencies": {},
   "author": "wangyang",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangyang602117818/fun-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wangyang602117818/fun-tools/issues"
+  },
+  "homepage": "https://github.com/wangyang602117818/fun-tools#readme"
 }
