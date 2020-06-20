@@ -72,5 +72,6 @@ function authorize(baseUrl, cookieName) {
     }
 }
 module.exports = {
-    authorize: authorize
+    authorize: authorize,
+    parseTokenSetMessage: parseTokenSetMessage
 }
