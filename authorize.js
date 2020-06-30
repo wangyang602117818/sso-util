@@ -25,19 +25,22 @@ function authorize(baseUrl, cookieName) {
     //sso退出
     if (ssourl) {
         ////////清除本站cookie
-        var ssoUrls = JSON.parse(window.atob(tools.parseBase64String(ssourl)));
+        var ssoUrls = JSON.parse(window.atob(tools.base64SecureURLDecode(ssourl)));
         var returnUrl = tools.getQueryString("returnUrl");
         var cookieValue = tools.getCookie(cookieName);
         if (cookieValue) {
             tools.setCookie(cookieName, cookieValue, -1);
         }
         /////////////////////
-        var index = 0;
         for (var i = 0; i < ssoUrls.length; i++) {
-            if (window.location.href.indexOf(ssoUrls[i]) > -1) index = i;
+            if (window.location.href.indexOf(ssoUrls[i]) > -1) {
+                ssoUrls.splice(i, 1);
+                break;
+            }
         }
-        if (index < ssoUrls.length - 1) {
-            window.location.href = ssoUrls[index + 1] + "?ssourls=" + ssourl + "&returnUrl=" + returnUrl;
+        if (ssoUrls.length > 0) {
+            var newSsoUrls = JSON.stringify(ssoUrls);
+            window.location.href = ssoUrls[0] + "?ssourls=" + tools.base64SecureURLEncode(window.btoa(newSsoUrls)) + "&returnUrl=" + returnUrl;
         }
         else //最后一个
         {

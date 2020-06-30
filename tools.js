@@ -26,8 +26,8 @@ function getQueryString(name) {
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return null;
 }
-//还原从url上面传过来的base64字符串
-function parseBase64String(str) {
+//把base64安全的编码解析成源吗
+function base64SecureURLDecode(str) {
     var result = str.replace('-', '+').replace('_', '/');
     switch (result.length % 4) {
         case 2:
@@ -38,6 +38,10 @@ function parseBase64String(str) {
             break;
     }
     return result;
+}
+//把base64字符串转成url安全的编码
+function base64SecureURLEncode(str){
+    return str.replace('+', '-').replace('/', '_').replace('=','');
 }
 //解析从mongo中传出来的 date.$date
 function parseBsonTime(value) {
@@ -206,7 +210,8 @@ module.exports = {
     getCookie: getCookie,
     setCookie: setCookie,
     getQueryString: getQueryString,
-    parseBase64String: parseBase64String,
+    base64SecureURLDecode: base64SecureURLDecode,
+    base64SecureURLEncode:base64SecureURLEncode,
     parseBsonTime: parseBsonTime,
     parseIsoDateTime: parseIsoDateTime,
     formatMonth: formatMonth,
