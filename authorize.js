@@ -59,7 +59,8 @@ function authorize(baseUrl, cookieName) {
         }
         //cookie不可用,但是有ticket
         else {
-            getTokenByTicket(getTokenUrl + "?ticket=" + ticket, function (result) {
+            var from = tools.trimEndChar(window.location.host, "/");
+            getTokenByTicket(getTokenUrl + "?from=" + from + "&ticket=" + ticket, function (result) {
                 if (result.code == 0 && result.result) {
                     parseTokenSetMessage(result.result);
                     //通过ticket获取到了token,一般发生在首次登陆
