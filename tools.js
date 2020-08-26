@@ -40,8 +40,8 @@ function base64SecureURLDecode(str) {
     return result;
 }
 //把base64字符串转成url安全的编码
-function base64SecureURLEncode(str){
-    return str.replace('+', '-').replace('/', '_').replace('=','');
+function base64SecureURLEncode(str) {
+    return str.replace('+', '-').replace('/', '_').replace('=', '');
 }
 //解析从mongo中传出来的 date.$date
 function parseBsonTime(value) {
@@ -206,12 +206,70 @@ function monthFormatInner(month, len) {
     if (len == 0) return "";
     return month;
 }
+//把字节转成用户可识别的文件大小
+function convertFileSize(value) {
+    var size = parseInt(value) / 1024;
+    if (size > 1024) {
+        size = size / 1024;
+        if (size > 1024) {
+            size = size / 1024;
+            return size.toFixed(2) + "GB";
+        } else {
+            return size.toFixed(2) + "MB";
+        }
+    } else {
+        return size.toFixed(2) + "KB";
+    }
+}
+//获取文件名称的后缀(小写)
+function getFileExtension(value) {
+    var dot = value.lastIndexOf(".");
+    if (dot == -1) return ".unknown";
+    return value.substring(dot, value.length).toLowerCase();
+}
+//移除字符串中的html标签
+function removeHTML(value) {
+    var reTag = /<(?:.|\s)*?>/g;
+    return value.replace(reTag, "");
+}
+//把秒转换成 00:00:00格式
+function convertTime(seconds) {
+    seconds = parseInt(seconds);
+    if (seconds < 60) return "00:" + "00:" + seconds;
+    var minuts = parseInt(seconds / 60);
+    if (minuts < 60) {
+        var seconds = parseInt(seconds % 60);
+        return "00:" + formatMonth(minuts) + ":" + formatMonth(seconds);
+    } else {
+        var h = parseInt(seconds / 3600);
+        minuts = parseInt((seconds - (h * 3600)) / 60);
+        seconds = parseInt((seconds - (h * 3600)) % 60);
+        return formatMonth(h) + ":" + formatMonth(minuts) + ":" + formatMonth(seconds);
+    }
+}
+//获取当前的时间
+function getCurrentDateTime() {
+    var date = new Date();
+    return (
+        date.getFullYear() +
+        "-" +
+        formatMonth(date.getMonth() + 1) +
+        "-" +
+        formatMonth(date.getDate()) +
+        " " +
+        formatMonth(date.getHours()) +
+        ":" +
+        formatMonth(date.getMinutes()) +
+        ":" +
+        formatMonth(date.getSeconds())
+    );
+}
 module.exports = {
     getCookie: getCookie,
     setCookie: setCookie,
     getQueryString: getQueryString,
     base64SecureURLDecode: base64SecureURLDecode,
-    base64SecureURLEncode:base64SecureURLEncode,
+    base64SecureURLEncode: base64SecureURLEncode,
     parseBsonTime: parseBsonTime,
     parseIsoDateTime: parseIsoDateTime,
     formatMonth: formatMonth,
@@ -227,5 +285,10 @@ module.exports = {
     htmlToDom: htmlToDom,
     reMapArray: reMapArray,
     getOuterHtml: getOuterHtml,
-    dateAddDays: dateAddDays
+    dateAddDays: dateAddDays,
+    convertFileSize: convertFileSize,
+    getFileExtension: getFileExtension,
+    removeHTML: removeHTML,
+    convertTime: convertTime,
+    getCurrentDateTime: getCurrentDateTime
 }

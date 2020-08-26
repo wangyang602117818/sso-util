@@ -1,7 +1,7 @@
 ///////////////验证中心方法 authorize(baseUrl,cookieName)////////////////////////////////////
 //验证完成之后 window.token_jwt_data 就是具体的信息
 //********************************************************************* */
-const tools = require('./tools')
+const tools = require('./tools');
 function getTokenByTicket(url, success, error) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function (event) {
@@ -16,6 +16,9 @@ function parseTokenSetMessage(token) {
     if (token) {
         var data = token.match(/\.(\w+)\./)[1];
         window.token_jwt_data = JSON.parse(window.atob(data));
+        //移除浏览器上的ticket
+        var newUrl = location.href.replace(/[?&]?ticket=[\w-_]*/, "");
+        history.replaceState({},"",newUrl);
     }
 }
 //sso验证方法 baseUrl:sso项目地址,cookieName:生成的cookiName

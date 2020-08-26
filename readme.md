@@ -24,6 +24,11 @@ cookie相关
     var result = parseIsoDateTime(str) //解析Newtonsoft.Json格式化的日期(IsoDateFormat)
     var result = formatMonth(month) //格式化成2位的时间格式
     var result = getReturnUrl(name) //获取url上面name参数之后所有部分,这和getQueryString有所不同,因为returnUrl后面可能还有参数
+    var result = convertFileSize(val) //把字节格式转成用户可识别的文件大小
+    var result = getFileExtension(val)  //获取文件扩展名(小写)
+    var result = removeHTML(val)  //移除字符串中的html标签
+    var result = convertTime(val)  //把秒转换成 00:00:00格式
+    var result = getCurrentDateTime()  //获取当前的日期
  随机数相关
     var result = randomWord(min,max)  //min:最小位数,max:最大位数
     var result = randomNumber(min,max) //min:最小值,max:最大值
