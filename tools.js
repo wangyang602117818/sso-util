@@ -120,17 +120,74 @@ function getFileName(fileName, length) {
 }
 //去除字符串首尾char字符串
 function trimChar(str, char) {
-    var reTag = new RegExp("^" + ("\\" + char || ' ') + "+|" + ("\\" + char || ' ') + "+$", "gi");
+    if (!char) char = " ";
+    var chars = [
+        "[",
+        "]",
+        "\\",
+        "^",
+        "$",
+        ".",
+        "|",
+        "?",
+        "*",
+        "+",
+        "(",
+        ")",
+        "{",
+        "}",
+    ];
+    var transfer = "";
+    if (chars.indexOf(char) > -1) transfer = "\\";
+    var reTag = new RegExp("^" + (transfer + char) + "+|" + (transfer + char) + "+$", "gi");
     return str.replace(reTag, "");
 }
 //去除字符串尾char字符串
 function trimEndChar(str, char) {
-    var reTag = new RegExp(('\\' + char || ' ') + "+$", "gi");
+    if (!char) char = " ";
+    var chars = [
+        "[",
+        "]",
+        "\\",
+        "^",
+        "$",
+        ".",
+        "|",
+        "?",
+        "*",
+        "+",
+        "(",
+        ")",
+        "{",
+        "}",
+    ];
+    var transfer = "";
+    if (chars.indexOf(char) > -1) transfer = "\\";
+    var reTag = new RegExp((transfer + char) + "+$", "gi");
     return str.replace(reTag, "");
 }
 //去除字符串首char字符串
 function trimStartChar(str, char) {
-    var reTag = new RegExp("^" + ("\\" + char || ' ') + "+", "gi");
+    if (!char) char = " ";
+    var chars = [
+        "[",
+        "]",
+        "\\",
+        "^",
+        "$",
+        ".",
+        "|",
+        "?",
+        "*",
+        "+",
+        "(",
+        ")",
+        "{",
+        "}",
+    ];
+    var transfer = "";
+    if (chars.indexOf(char) > -1) transfer = "\\";
+    var reTag = new RegExp("^" + (transfer + char) + "+", "gi");
     return str.replace(reTag, "");
 }
 //把html字符串转换成dom对象

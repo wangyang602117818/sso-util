@@ -48,4 +48,24 @@ html 字符串相关
 时间相关
     var result = dateAddDays(date,-13,"yyyy-MM-dd");  //日期添加或减少几天date可以为字符串或者Date对象
 ```
-
+## vue 组件列表
+```
+import ssocomponent from "sso-util/plugins/index"
+Vue.use(ssocomponent)
+```
+```
+<vue-server-select 
+    :datas="datas"
+    :selected="selected"
+    @select="selectItem"
+    @search="searchItem"
+    @nextPage="nextPage"
+    :loading="loading"
+    :pageEnd="pageEnd"
+    label="UserName"
+    value="UserId"
+    multiple
+/>
+//label:select的text(默认name)
+//value:select的value(默认id)
+```
