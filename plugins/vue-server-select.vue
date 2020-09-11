@@ -48,11 +48,11 @@
 </template>
 
 <script>
-import vueicondown from "./vue-icon-down";
-import vueiconloading from "./vue-icon-loading";
-import vueiconup from "./vue-icon-up";
+import vueicondown from "../icon/vue-icon-down";
+import vueiconloading from "../icon/vue-icon-loading";
+import vueiconup from "../icon/vue-icon-up";
 export default {
-  name: "vue-server-search",
+  name: "vue-server-select",
   components: { vueicondown, vueiconup, vueiconloading },
   props: {
     datas: { type: Array, required: true },
