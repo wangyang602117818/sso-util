@@ -5,7 +5,7 @@ const tools = require('./tools');
 function getTokenByTicket(url, success, error) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function (event) {
-        var target = event.srcElement || event.target;
+        var target = event.target;
         success(JSON.parse(target.responseText));
     };
     if (error) xhr.onerror = error;
@@ -15,7 +15,7 @@ function getTokenByTicket(url, success, error) {
 function parseTokenSetMessage(token) {
     if (token) {
         var data = token.match(/\.(\w+)\./)[1];
-        window.token_jwt_data = JSON.parse(window.atob(data));
+        window.token_jwt_data = JSON.parse(tools.base64.decode(data));
         //移除浏览器上的ticket
         var newUrl = location.href.replace(/[?&]?ticket=[\w-_]*/, "");
         history.replaceState({},"",newUrl);
@@ -28,7 +28,7 @@ function authorize(baseUrl, cookieName) {
     //sso退出
     if (ssourl) {
         ////////清除本站cookie
-        var ssoUrls = JSON.parse(window.atob(tools.base64SecureURLDecode(ssourl)));
+        var ssoUrls = JSON.parse(tools.base64.decode(tools.base64SecureURLDecode(ssourl)));
         var returnUrl = tools.getQueryString("returnUrl");
         var cookieValue = tools.getCookie(cookieName);
         if (cookieValue) {
@@ -43,7 +43,7 @@ function authorize(baseUrl, cookieName) {
         }
         if (ssoUrls.length > 0) {
             var newSsoUrls = JSON.stringify(ssoUrls);
-            window.location.href = ssoUrls[0] + "?ssourls=" + tools.base64SecureURLEncode(window.btoa(newSsoUrls)) + "&returnUrl=" + returnUrl;
+            window.location.href = ssoUrls[0] + "?ssourls=" + tools.base64SecureURLEncode(tools.base64.encode(newSsoUrls)) + "&returnUrl=" + returnUrl;
         }
         else //最后一个
         {

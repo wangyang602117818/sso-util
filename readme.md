@@ -20,6 +20,8 @@ cookie相关
     var result = getQueryString(name)  //获取url上面的参数
     var result = base64SecureURLDecode(str) //把base64安全的编码解析成源吗
     var result = base64SecureURLEncode(base64) //把base64字符串转成url安全的编码
+    var result = base64.encode(str)  //base64编码
+    var result = base64.decode(base64_str)  //base64解码
     var result = parseBsonTime(str) //解析从mongo中传出来的 date.$date
     var result = parseIsoDateTime(str) //解析Newtonsoft.Json格式化的日期(IsoDateFormat)
     var result = formatMonth(month) //格式化成2位的时间格式

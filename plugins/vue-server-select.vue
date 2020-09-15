@@ -98,7 +98,6 @@ export default {
       that.closeSelect();
     });
     this.loadMoreObserver = new IntersectionObserver(this.infiniteScroll);
-    window.console.log(this.multiple);
   },
   methods: {
     showSelect($event) {
@@ -151,27 +150,27 @@ export default {
   color: #35495e;
 }
 .vueserverselect {
-  width: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 .vueserverselect-content {
   border: 1px solid #ccc;
+  background-color:#fff;
   display: flex;
   flex-direction: row;
 }
 .vueserverselect-data {
   cursor: text;
   flex: 1;
-  padding: 2px;
 }
 .vueserverselect-multiple {
-  display: flex;
   margin: 3px;
-  padding: 2px;
+  padding: 0px 4px;
   background-color: #e3f2fd;
   float: left;
+  height: 24px;
+  line-height: 24px;
 }
 .vueserverselect-item {
   float: left;
@@ -182,9 +181,11 @@ export default {
 .vueserverselect-text {
   margin-right: 3px;
   color: #039be4;
+  display: inline-flex;
+  align-items: center;
 }
 .vueserverselect-del {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   cursor: pointer;
   color: #039be4;
@@ -217,6 +218,7 @@ export default {
   bottom: -401px;
   overflow-y: auto;
   position: absolute;
+  z-index: 100;
   background-color: #fff;
   left: 0;
   right: 0;
