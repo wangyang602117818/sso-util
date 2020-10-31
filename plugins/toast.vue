@@ -1,6 +1,6 @@
 <template>
   <transition name="move">
-    <div class="toast" v-if="show">
+    <div class="toast" v-if="show" :style="'top:' + top + 'px'">
       <svg viewBox="0 0 1024 1024" width="18" height="18" v-if="type == 'info'">
         <path
           d="M512 39.384615C250.092308 39.384615 39.384615 250.092308 39.384615 512s210.707692 472.615385 472.615385 472.615385 472.615385-210.707692 472.615385-472.615385S773.907692 39.384615 512 39.384615z m0 238.276923c33.476923 0 59.076923 25.6 59.076923 59.076924s-25.6 59.076923-59.076923 59.076923-59.076923-25.6-59.076923-59.076923 25.6-59.076923 59.076923-59.076924z m98.461538 413.538462c0 9.846154-7.876923 17.723077-19.692307 17.723077h-157.538462c-9.846154 0-19.692308-5.907692-19.692307-17.723077v-39.384615c0-9.846154 7.876923-21.661538 19.692307-21.661539 9.846154 0 19.692308-5.907692 19.692308-17.723077v-78.769231c0-9.846154-7.876923-21.661538-19.692308-21.661538-9.846154 0-19.692308-5.907692-19.692307-17.723077v-39.384615c0-9.846154 7.876923-21.661538 19.692307-21.661539h118.153846c9.846154 0 19.692308 9.846154 19.692308 21.661539v157.538461c0 9.846154 7.876923 17.723077 19.692308 17.723077 9.846154 0 19.692308 9.846154 19.692307 21.661539v39.384615z"
@@ -43,7 +43,8 @@ export default {
       show: false,
       type: "success",
       message: "success!",
-      duration: 1
+      duration: 2,
+      top: 20,
     };
   },
   computed: {
@@ -62,6 +63,12 @@ export default {
   mounted() {
     this.show = true;
     var that = this;
+    var top = Math.floor(
+      document.body.scrollTop ||
+        document.documentElement.scrollTop ||
+        window.pageYOffset
+    );
+    this.top = top + 20;
     setTimeout(() => {
       that.show = false;
     }, that.duration * 1000);
@@ -73,7 +80,6 @@ export default {
 .toast {
   position: absolute;
   background-color: #fff;
-  top: 20px;
   padding: 8px 14px;
   border-radius: 4px;
   font-size: 14px;
@@ -95,7 +101,7 @@ export default {
 }
 .move-enter-active,
 .move-leave-active {
-  transition: 200ms;
+  transition: 400ms;
 }
 .move-enter-to {
   transform: translateY(0);
