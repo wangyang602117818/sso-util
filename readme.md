@@ -51,10 +51,9 @@ html 字符串相关
     var result = dateAddDays(date,-13,"yyyy-MM-dd");  //日期添加或减少几天date可以为字符串或者Date对象
 ```
 ## vue 组件列表
-```
 import ssocomponent from "sso-util/plugins/index"
 Vue.use(ssocomponent)
-```
+### select
 ```
 <vue-server-select 
     :datas="datas"
@@ -70,4 +69,46 @@ Vue.use(ssocomponent)
 />
 //label:select的text(默认name)
 //value:select的value(默认id)
+```
+### toast
+```
+this.$toast("success", "成功");
+this.$toast("info", "警告",5);  //5s
+this.$toast("error", "错误",10); //10s
+```
+### confirm
+```
+this.$confirm(content,title,cancel,ok, () => {
+    window.console.log(this);
+});
+```
+### modal
+```
+<vue-modal draggable=".v-modal-title" :show="show" @close="closeModal">
+    <div class="v-modal-title">
+        <div class="v-modal-c-title">Title</div>
+        <div class="v-modal-close" @click="closeModal">
+          <vue-icon-delete size="18" />
+        </div>
+    </div>
+    <div class="v-modal-content"></div>
+    <div class="v-modal-buttons">
+        <button
+          type="button"
+          class="v-modal-button"
+          tabindex="1"
+          @click="closeModal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="v-modal-button"
+          tabindex="2"
+          @click="ok"
+        >
+          Submit
+        </button>
+    </div>
+</vue-modal>
 ```
