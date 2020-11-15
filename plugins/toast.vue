@@ -43,7 +43,7 @@ export default {
       show: false,
       type: "success",
       message: "success!",
-      duration: 2,
+      duration: 0,
       top: 20,
     };
   },
