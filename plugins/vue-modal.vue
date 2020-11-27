@@ -9,7 +9,7 @@
     >
       <div
         class="v-modal-dialog"
-        :style="'width:' + width + 'px;height:' + height + 'px'"
+        :style="'width:' + width + 'px'"
         @click.stop
         @mousedown="mouseDown"
       >
@@ -34,12 +34,6 @@ export default {
         return 300;
       },
     },
-    height: {
-      type: Number,
-      default: function () {
-        return 150;
-      },
-    },
     resizable: { type: Boolean },
     draggable: { type: String },
     clickToClose: {
@@ -50,8 +44,7 @@ export default {
     },
     show: { type: Boolean },
   },
-  computed: {
-  },
+  computed: {},
   data() {
     return {
       draging: false,
@@ -98,9 +91,15 @@ export default {
       //全局都能drag
       if (draggable == "") {
         this.draging = true;
-      } else if (draggable.indexOf(e.target.className) > -1) {
+      } else if (
+        e.target.className &&
+        draggable.indexOf(e.target.className) > -1
+      ) {
         this.draging = true;
-      } else if (draggable.indexOf(e.target.parentElement.className) > -1) {
+      } else if (
+        e.target.parentElement.className &&
+        draggable.indexOf(e.target.parentElement.className) > -1
+      ) {
         this.draging = true;
       }
       if (this.draging) {
@@ -109,7 +108,7 @@ export default {
       }
     },
     close(e) {
-      this.$emit('close');
+      this.$emit("close");
     },
   },
 };
@@ -121,7 +120,7 @@ export default {
   padding: 0;
 }
 .v-modal-background {
-  position: absolute;
+  position: fixed;
   background: rgba(0, 0, 0, 0.2);
   top: 0;
   bottom: 0;
