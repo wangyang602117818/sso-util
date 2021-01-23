@@ -3,8 +3,7 @@
     <div class="v-confirm-background" v-if="show" @click="close">
       <div
         class="v-confirm-dialog"
-        :style="'width:300px;height:150px'"
-        :ref="'vconfirmdialog'"
+        :style="'width:300px'"
         @click.stop
         @mouseup.stop="draging = false"
         @mousemove.stop="mouseMove"
@@ -101,7 +100,7 @@ export default {
 
 <style scoped>
 .v-confirm-background {
-  position: absolute;
+  position: fixed;
   background: rgba(0, 0, 0, 0.2);
   top: 0;
   bottom: 0;
