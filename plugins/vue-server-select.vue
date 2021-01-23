@@ -214,8 +214,8 @@ export default {
 }
 .vueserverselect-dropdown {
   border: 1px solid #ccc;
-  height: 400px;
-  bottom: -401px;
+  height: 250px;
+  bottom: -251px;
   overflow-y: auto;
   position: absolute;
   z-index: 100;
