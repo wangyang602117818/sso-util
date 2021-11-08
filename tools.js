@@ -1,10 +1,13 @@
-//设置cookie cname:键,cvalue:值,exdays=天
-function setCookie(cname, cvalue, exdays) {
+//设置cookie cname:键,cvalue:值,exdays=天,samesite=Strict|Lax|None
+function setCookie(cname, cvalue, exdays, samesite) {
     var cookies = cname + "=" + cvalue + ";path=/";
     if (exdays) {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         cookies += ";expires=" + d.toGMTString();
+    }
+    if (samesite) {
+        cookies += ";samesite=" + samesite;
     }
     document.cookie = cookies;
 }
@@ -300,7 +303,7 @@ function removeHTML(value) {
 //把秒转换成 00:00:00格式
 function convertTime(seconds) {
     seconds = parseInt(seconds);
-    if (seconds < 60) return "00:" + "00:" + seconds;
+    if (seconds < 60) return "00:" + "00:" + formatMonth(seconds);
     var minuts = parseInt(seconds / 60);
     if (minuts < 60) {
         var seconds = parseInt(seconds % 60);
