@@ -18,7 +18,7 @@ function parseTokenSetMessage(token) {
         window.token_jwt_data = JSON.parse(tools.base64DeCode(data));
         //移除浏览器上的ticket
         var newUrl = location.href.replace(/[?&]?ticket=[\w-_]*/, "");
-        history.replaceState({},"",newUrl);
+        history.replaceState({}, "", newUrl);
     }
 }
 //sso验证方法 baseUrl:sso项目地址,cookieName:生成的cookiName
@@ -67,7 +67,7 @@ function authorize(baseUrl, cookieName) {
                 if (result.code == 0 && result.result) {
                     parseTokenSetMessage(result.result);
                     //通过ticket获取到了token,一般发生在首次登陆
-                    tools.setCookie(cookieName, result.result);
+                    tools.setCookie(cookieName, result.result, 'Lax');
                 } else {
                     //两者都不可用
                     window.location.href = baseUrl + "?returnUrl=" + window.location.href;
