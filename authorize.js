@@ -47,7 +47,7 @@ function authorize(baseUrl, cookieName) {
         }
         else //最后一个
         {
-            window.location.href = baseUrl + "?returnUrl=" + returnUrl;
+            window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + returnUrl;
         }
         return;
     }
@@ -57,7 +57,7 @@ function authorize(baseUrl, cookieName) {
     if (!authorization) {
         //cookie和ticket都不可用的时候
         if (!ticket) {
-            window.location.href = baseUrl + "?returnUrl=" + window.location.href;
+            window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + window.location.href;
             return;
         }
         //cookie不可用,但是有ticket
@@ -70,7 +70,7 @@ function authorize(baseUrl, cookieName) {
                     tools.setCookie(cookieName, result.result, 'Lax');
                 } else {
                     //两者都不可用
-                    window.location.href = baseUrl + "?returnUrl=" + window.location.href;
+                    window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + window.location.href;
                 }
             });
         }
