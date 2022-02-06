@@ -23,7 +23,7 @@ function parseTokenSetMessage(token) {
 }
 //sso验证方法 baseUrl:sso项目地址,cookieName:生成的cookiName
 function authorize(baseUrl, cookieName) {
-    var getTokenUrl = baseUrl + "sso/gettoken";
+    var getTokenUrl = tools.trimEndChar(baseUrl, '/') + "/sso/gettoken";
     var ssourl = tools.getQueryString("ssourls");
     //sso退出
     if (ssourl) {
