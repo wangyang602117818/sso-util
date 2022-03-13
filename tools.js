@@ -101,8 +101,11 @@ function removeArrayItem(array, val) {
 }
 //获取url上面name参数之后所有部分,这和getQueryString有所不同,因为returnUrl后面可能还有参数
 function getReturnUrl(name) {
-    var index = window.location.search.indexOf(name);
-    var returnUrl = window.location.search.substring(index + name.length + 1);
+    var urlArr = window.location.href.split("?");
+    if (urlArr.length < 2) return null;
+    var search = urlArr[1];
+    var index = search.indexOf(name);
+    var returnUrl = search.substring(index + name.length + 1);
     return returnUrl;
 }
 //根据userAgent获取设备类型 mobile|pc
