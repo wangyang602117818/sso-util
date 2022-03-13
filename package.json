@@ -1,6 +1,6 @@
 {
   "name": "sso-util",
-  "version": "1.6.5",
+  "version": "1.6.8",
   "description": "Frontend tools",
   "main": "index.js",
   "scripts": {

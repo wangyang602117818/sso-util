@@ -52,7 +52,7 @@ function authorize(baseUrl, cookieName) {
         return;
     }
     var authorization = tools.getCookie(cookieName);
-    var ticket = tools.getQueryString("ticket");
+    var ticket = tools.getTicket();
     //cookie不可用的时候
     if (!authorization) {
         //cookie和ticket都不可用的时候
