@@ -25,7 +25,7 @@ function getCookie(cname) {
 }
 //获取url上面的参数
 function getQueryString(name) {
-    var urlArr = window.location.href.split("?");
+    var urlArr = window.location.href.replace(window.location.hash, "").split("?");
     if (urlArr.length < 2) return null;
     var paras = urlArr[1].split('&');
     for (var i = 0; i < paras.length; i++) {
@@ -101,7 +101,7 @@ function removeArrayItem(array, val) {
 }
 //获取url上面name参数之后所有部分,这和getQueryString有所不同,因为returnUrl后面可能还有参数
 function getReturnUrl(name) {
-    var urlArr = window.location.href.split("?");
+    var urlArr = window.location.href.replace(window.location.hash, "").split("?");
     if (urlArr.length < 2) return null;
     var search = urlArr[1];
     var index = search.indexOf(name);
