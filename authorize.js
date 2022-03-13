@@ -21,6 +21,9 @@ function parseTokenSetMessage(token) {
         history.replaceState({}, "", newUrl);
     }
 }
+function returnUrlToBase64(returnUrl) {
+    return tools.base64SecureURLEncode(tools.base64EnCode(returnUrl));
+}
 //sso验证方法 baseUrl:sso项目地址,cookieName:生成的cookiName
 function authorize(baseUrl, cookieName) {
     var getTokenUrl = tools.trimEndChar(baseUrl, '/') + "/sso/gettoken";
@@ -30,6 +33,7 @@ function authorize(baseUrl, cookieName) {
         ////////清除本站cookie
         var ssoUrls = JSON.parse(tools.base64DeCode(tools.base64SecureURLDecode(ssourl)));
         var returnUrl = tools.getQueryString("returnUrl");
+        returnUrl = returnUrlToBase64(returnUrl);
         var cookieValue = tools.getCookie(cookieName);
         if (cookieValue) {
             tools.setCookie(cookieName, cookieValue, -1);
@@ -57,7 +61,7 @@ function authorize(baseUrl, cookieName) {
     if (!authorization) {
         //cookie和ticket都不可用的时候
         if (!ticket) {
-            window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + window.location.href;
+            window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + returnUrlToBase64(window.location.href);
             return;
         }
         //cookie不可用,但是有ticket
@@ -70,7 +74,7 @@ function authorize(baseUrl, cookieName) {
                     tools.setCookie(cookieName, result.result, 'Lax');
                 } else {
                     //两者都不可用
-                    window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + window.location.href;
+                    window.location.href = tools.trimEndChar(baseUrl, '/') + "/sso/login?returnUrl=" + returnUrlToBase64(window.location.href);
                 }
             });
         }
