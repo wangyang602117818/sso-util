@@ -7,7 +7,7 @@ function setCookie(cname, cvalue, exdays, samesite) {
         cookies += ";expires=" + d.toGMTString();
     }
     if (samesite) {
-        cookies += ";samesite=" + samesite;
+        cookies += ";SameSite=" + samesite;
     }
     document.cookie = cookies;
 }
@@ -25,9 +25,14 @@ function getCookie(cname) {
 }
 //获取url上面的参数
 function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substring(1).match(reg);
-    if (r != null) return decodeURI(r[2]); return null;
+    var urlArr = window.location.href.split("?");
+    if (urlArr.length < 2) return null;
+    var paras = urlArr[1].split('&');
+    for (var i = 0; i < paras.length; i++) {
+        var paraArr = paras[i].split('=');
+        if (paraArr[0].toLowerCase() == name.toLowerCase()) return paraArr[1];
+    }
+    return null;
 }
 //base64编码,支持中文
 function base64EnCode(str) {
