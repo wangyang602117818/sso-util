@@ -25,14 +25,10 @@ function getCookie(cname) {
 }
 //获取url上面的参数
 function getQueryString(name) {
-    var urlArr = window.location.href.split("?");
-    if (urlArr.length < 2) return null;
-    var paras = urlArr[1].split('&');
-    for (var i = 0; i < paras.length; i++) {
-        var paraArr = paras[i].split('=');
-        if (paraArr[0].toLowerCase() == name.toLowerCase()) return paraArr[1];
-    }
-    return null;
+    var url = window.location.href;
+    let regexp = new RegExp('[?&]' + name + '=([^&#]*)', 'i');
+    let res = regexp.exec(url);
+    return res ? res[1] : null;
 }
 //base64编码,支持中文
 function base64EnCode(str) {
