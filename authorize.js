@@ -21,6 +21,19 @@ function parseTokenSetMessage(token) {
         history.replaceState({}, "", newUrl);
     }
 }
+//获取authorization(jwt token)
+function getAuthorization(cookieName) {
+    return tools.getCookie(cookieName);
+}
+//获取用户基本信息
+function getUserData(cookieName) {
+    var authorization = getAuthorization(cookieName);
+    if (authorization) {
+        var data = authorization.match(/\.(\w+)\./)[1];
+        return JSON.parse(tools.base64DeCode(data));
+    }
+    return null;
+}
 //sso验证方法 baseUrl:sso项目地址,cookieName:生成的cookiName
 function authorize(baseUrl, cookieName) {
     var getTokenUrl = tools.trimEndChar(baseUrl, '/') + "/sso/gettoken";
@@ -80,5 +93,7 @@ function authorize(baseUrl, cookieName) {
 }
 module.exports = {
     authorize: authorize,
-    parseTokenSetMessage: parseTokenSetMessage
+    parseTokenSetMessage: parseTokenSetMessage,
+    getAuthorization: getAuthorization,
+    getUserData: getUserData
 }
