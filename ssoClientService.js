@@ -31,6 +31,12 @@ function SSOClientService(ssoBaseUrl, authorization) {
         options.headers = new Headers({ Authorization: this.authorization });
         var url = this.ssoBaseUrl + "/user/getByUserId?userId=" + userId;
         return fetch(url, options).then(res => res.json());
+    };
+    this.getUserPermissions = function () {
+        var options = { method: 'get' };
+        options.headers = new Headers({ Authorization: this.authorization });
+        var url = this.ssoBaseUrl + "/user/getPermissions";
+        return fetch(url, options).then(res => res.json());
     }
 }
 
