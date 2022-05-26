@@ -224,6 +224,7 @@ function reMapArray(array, len) {
             new_array.push(array.slice(i, i + len));
         }
     }
+    if (new_array == 0) return new_array;
     while (new_array[new_array.length - 1].length < len) {
         new_array[new_array.length - 1].push(null);
     }
