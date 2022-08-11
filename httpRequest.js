@@ -105,18 +105,18 @@ var httpRequest = {
     downloadFile: function (url, jsonData, headers, filename) {
         this.filename = filename;
         this.getFile(url, jsonData, headers).then(res => {
-            if (!httpRequestHelper.filename) {
+            if (!httpRequest.filename) {
                 var contentDisposition = res.headers.get('Content-Disposition');
-                if (contentDisposition) httpRequestHelper.filename = contentDisposition.split(';')[1].split('=')[1];
+                if (contentDisposition) httpRequest.filename = contentDisposition.split(';')[1].split('=')[1];
             }
             res.blob().then(blob => {
                 var a = document.createElement('a');
                 var url = window.URL.createObjectURL(blob);
                 a.href = url;
-                a.download = httpRequestHelper.filename;
+                a.download = httpRequest.filename;
                 a.click();
                 window.URL.revokeObjectURL(url);
-                httpRequestHelper.filename = "";
+                httpRequest.filename = "";
             });
         })
     }
