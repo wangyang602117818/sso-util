@@ -1,13 +1,8 @@
 <template>
   <transition name="fade">
     <div class="v-confirm-background" v-if="show" @click="close">
-      <div
-        class="v-confirm-dialog"
-        :style="'width:300px'"
-        @click.stop
-        @mouseup.stop="draging = false"
-        @mousemove.stop="mouseMove"
-      >
+      <div class="v-confirm-dialog" :style="'width:300px'" @click.stop @mouseup.stop="draging = false"
+        @mousemove.stop="mouseMove">
         <div class="v-confirm-title" @mousedown="mouseDown">
           <div class="v-confirm-c-title">{{ title }}</div>
           <div class="v-confirm-close" @click="show = false">
@@ -18,20 +13,10 @@
           {{ content }}
         </div>
         <div class="v-confirm-buttons">
-          <button
-            type="button"
-            class="v-confirm-button"
-            tabindex="1"
-            @click="close"
-          >
+          <button type="button" class="v-confirm-button" tabindex="1" @click="close">
             {{ cancelTitle }}
           </button>
-          <button
-            type="button"
-            class="v-confirm-button"
-            tabindex="2"
-            @click="ok"
-          >
+          <button type="button" class="v-confirm-button" tabindex="2" @click="ok">
             {{ submitTitle }}
           </button>
         </div>
@@ -44,13 +29,38 @@
 import vueicondel from "../icon/vue-icon-delete";
 export default {
   components: { vueicondel },
+  props: {
+    title: {
+      type: String,
+      default: function () {
+        return "Title";
+      }
+    },
+    content: {
+      type: String,
+      default: function () {
+        return "Content";
+      }
+    },
+    cancelTitle: {
+      type: String,
+      default: function () {
+        return "No";
+      }
+    },
+    submitTitle: {
+      type: String,
+      default: function () {
+        return "Yes";
+      }
+    },
+    confirm: {
+      type: Function
+    }
+  },
   data() {
     return {
       show: false,
-      title: "Title",
-      content: "",
-      cancelTitle: "No",
-      submitTitle: "Yes",
       draging: false,
       modelDialog: null,
       dialogLeft: 0,
@@ -110,6 +120,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .v-confirm-dialog {
   position: absolute;
   background-color: #fff;
@@ -118,6 +129,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .v-confirm-title {
   display: flex;
   align-items: center;
@@ -126,20 +138,25 @@ export default {
   background: linear-gradient(0deg, #e0e0e0 10%, #f0f0f0 90%);
   cursor: move;
 }
+
 .v-confirm-c-title {
   flex: 1;
   display: flex;
 }
+
 .v-confirm-close {
   display: flex;
 }
+
 .v-confirm-close svg {
   cursor: pointer;
 }
+
 .v-confirm-content {
   flex: 1;
   padding: 8px;
 }
+
 .v-confirm-buttons {
   bottom: 0;
   padding: 8px;
@@ -148,6 +165,7 @@ export default {
   border-top: 1px solid #dddedf;
   justify-content: flex-end;
 }
+
 .v-confirm-button {
   margin-right: 10px;
   border: 1px solid #dddedf;
@@ -158,18 +176,22 @@ export default {
   padding-left: 20px;
   padding-right: 20px;
 }
+
 .v-confirm-button:hover {
   border: 1px solid #484848;
   color: #000;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 200ms;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
+
 .fade-enter-to,
 .fade-leave {
   opacity: 1;
